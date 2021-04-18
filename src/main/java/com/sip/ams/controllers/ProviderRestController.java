@@ -1,5 +1,6 @@
 package com.sip.ams.controllers;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -54,5 +55,15 @@ public class ProviderRestController {
             return ResponseEntity.ok().build();
         }).orElseThrow(() -> new IllegalArgumentException("ProviderId " + providerId + " not found"));
     }
+    
+    @GetMapping("/{providerId}")
+    public Provider getProvider(@PathVariable Long providerId) {
+    	
+    	Optional<Provider> p = providerRepository.findById(providerId);
+        
+    	return p.get();
+    	
+    }
+	
 
 }
